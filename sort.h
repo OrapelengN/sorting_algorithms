@@ -17,6 +17,15 @@ typedef struct listint_s
 	struct listint_s *next;
 } listint_t;
 
+/**
+ * struct deck_node_s - Doubly linked list node for deck representation
+ * @n: Integer stored in the node, representing the card value
+ * @prev: Pointer to the previous element of the list
+ * @next: Pointer to the next element of the list
+ *
+ * Description: Node structure for a deck of cards represented as
+ * a doubly linked list for sorting operations.
+ */
 typedef struct deck_node_s
 {
 	int n;

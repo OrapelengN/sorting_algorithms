@@ -11,6 +11,10 @@ void shell_sort(int *array, size_t size)
 	size_t gap = 1, i, j;
 	int temp;
 
+	/* Handle cases where no sorting is needed */
+	if (array == NULL || size < 2)
+		return;
+
 	/* Generate the maximum Knuth sequence gap less than size */
 	while (gap < size / 3)
 		gap = gap * 3 + 1;

@@ -1,5 +1,12 @@
 #include <stdlib.h>
+#include <string.h>
 #include "deck.h"
+
+/* Define the order of card values for comparison */
+const char *order_values[] = {
+	"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+	"Jack", "Queen", "King"
+};
 
 /* Function to compare two cards */
 int card_compare(const void *a, const void *b)
@@ -7,23 +14,17 @@ int card_compare(const void *a, const void *b)
 	const deck_node_t *card_a = *(const deck_node_t **)a;
 	const deck_node_t *card_b = *(const deck_node_t **)b;
 
-	/* Define card order values */
-	const char *order_values[] = {
-        "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10",
-        "Jack", "Queen", "King"
-	};
-
-	/* Compare by kind first */
+	/* Compare by value */
 	if (card_a->card->kind != card_b->card->kind)
 		return card_a->card->kind - card_b->card->kind;
 
 	/* If kinds are equal, compare by value */
 	for (int i = 0; i < 13; i++)
 	{
-		if (card_a->card->value == order_values[i])
-			return -1; /* card_a comes before card_b */
-		if (card_b->card->value == order_values[i])
-			return 1;  /* card_b comes before card_a */
+		if (strcmp(card_a->card->value, order_values[i]) == 0)
+			return -1; /* card_a is less than card_b */
+		if (strcmp(card_b->card->value, order_values[i]) == 0)
+			return 1;  /* card_b is less than card_a */
 	}
 
 	return 0; /* They are equal */
